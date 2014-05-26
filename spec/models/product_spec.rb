@@ -8,6 +8,7 @@ describe Spree::Product do
       context 'When at least a variant on sale' do
         before do
           create(:variant, product: subject, sale_price: 10)
+          subject.reload
         end
 
         it 'should be true' do
@@ -25,7 +26,9 @@ describe Spree::Product do
     context 'When it has no variants' do
       context 'When master variant is on sale' do
         before do
+          subject.price = 200
           subject.master.update_attribute :sale_price, 123
+          subject.reload
         end
 
         it 'should be true' do

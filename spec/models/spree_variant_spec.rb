@@ -10,6 +10,7 @@ describe Spree::Variant do
   describe '#on_sale?' do
     context 'When sale price is present' do
       before do
+        subject.price = 20
         subject.sale_price = 10
       end
 
