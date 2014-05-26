@@ -5,4 +5,9 @@ Spree::Product.class_eval do
   def on_sale?
     variants_including_master.any?{ |v| v.on_sale? }
   end
+
+  def set_discount(discount)
+    self.sale_price = price - (price * discount / 100.0)
+    self.save
+  end
 end

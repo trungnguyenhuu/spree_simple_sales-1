@@ -28,6 +28,7 @@ require 'spree/testing_support/factories'
 require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/authorization_helpers'
 require 'spree/testing_support/url_helpers'
+require 'sidekiq/testing'
 
 # Requires factories defined in lib/spree_simple_sales/factories.rb
 require 'spree_simple_sales/factories'
