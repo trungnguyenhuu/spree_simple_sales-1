@@ -44,7 +44,7 @@ module Spree
     end
 
     def unschedule_current_job
-      Sidekiq::Status.unschedule deactivation_job_id
+      Sidekiq::Status.cancel deactivation_job_id
     end
 
     def schedule_deactivation
