@@ -1,6 +1,21 @@
 en:
   spree:
     sales: Sales
+    sale_creation_success: Sale succesfuly created
+    sale_creation_error: An error ocurred while saving the sale
+    sale_update_success: Sale succesfuly updated
+    sale_update_error: An error ocurred while saving the sale
+    new_sale: New sale
+    discount: Discount
+    taxons: Taxons
+    end_date: End date
+    edit_sale: Edit sale
+    sales_actions: Actions
+    new_sale: New sale
+    listing_sales: Listing sales
+    admin:
+      tab:
+        sales: Sales
   activerecord:
     models:
       spree/sale:

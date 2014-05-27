@@ -1,6 +1,21 @@
 es:
   spree:
     sales: Ofertas
+    sale_creation_success: Oferta creada correctament
+    sale_creation_error: Ocurrio un error al crear la oferta
+    sale_update_success: Oferta actualizada correctamente
+    sale_update_error: Ocurrio un error al actualizar la oferta
+    new_sale: Nueva oferta
+    discount: Porcentaje de descuento
+    taxons: Categorias
+    end_date: Fecha limite
+    edit_sale: Editar oferta
+    sales_actions: Accciones
+    new_sale: Nueva oferta
+    listing_sales: Listado de ofertas
+    admin:
+      tab:
+        sales: Sales
   activerecord:
     models:
       spree/sale:
