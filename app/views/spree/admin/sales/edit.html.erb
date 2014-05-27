@@ -1,0 +1,7 @@
+<%= render partial: 'spree/shared/error_messages', locals: { target: @sale } %>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:edit_sale) %>
+<% end %>
+
+<%= render 'spree/admin/sales/form' %>

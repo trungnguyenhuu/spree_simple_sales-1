@@ -1,0 +1,9 @@
+<tr>
+  <td><%= sale.name %></td>
+  <td><%= sale.taxon_names %></td>
+  <td><%= distance_of_time_in_words Time.zone.now, sale.end_date %></td>
+  <td>
+    <%= link_to Spree.t(:edit), spree.edit_admin_sale_path(sale) %>
+    <%= link_to Spree.t(:delete), spree.admin_sale_path(sale), method: :delete %>
+  </td>
+</tr>

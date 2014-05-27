@@ -4,9 +4,10 @@ module Spree
 
     attr_accessible :name, :end_date, :discount, :taxon_ids
 
-    validate :end_date, presence: true
+    validates :name, :end_date,
+              presence: true
 
-    after_create :activate_async!, :schedule_deactivation
+    after_save :update_async!
 
     def activate!
       Spree::Product.in_taxons(taxons).readonly(false).find_each do |product|
@@ -27,10 +28,19 @@ module Spree
       !!deactivation_job_id
     end
 
+    def taxon_names
+      taxons.map(&:permalink).join(', ')
+    end
+
+    def taxon_ids=(string_ids)
+      super(string_ids.split(','))
+    end
+
     private
 
-    def activate_async!
-      SaleActivator.perform_async(self.id)
+    def update_async!
+      SaleUpdater.perform_in(5.seconds, self.id)
+      schedule_deactivation
     end
 
     def unschedule_current_job

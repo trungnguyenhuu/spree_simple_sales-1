@@ -1,5 +1,5 @@
 class AddDiscountToSpreeSales < ActiveRecord::Migration
   def change
-    add_column :spree_sales, :discount, :integerm, default: 0
+    add_column :spree_sales, :discount, :integer, default: 0
   end
 end

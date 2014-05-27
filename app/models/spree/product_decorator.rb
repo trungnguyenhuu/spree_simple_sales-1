@@ -7,7 +7,7 @@ Spree::Product.class_eval do
   end
 
   def set_discount(discount)
-    self.sale_price = price - (price * discount / 100.0)
+    self.sale_price = (price - (price * discount / 100.0)).round
     self.save
   end
 end

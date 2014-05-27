@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 2.0.5'
+  s.add_dependency 'spree', '~> 2.0.5'
   s.add_dependency 'sidekiq'
   s.add_dependency 'sidekiq-status'
 
@@ -30,5 +30,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'pg'
   s.add_development_dependency 'spree_sample'
 end

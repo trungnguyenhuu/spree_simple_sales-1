@@ -1,0 +1,38 @@
+<div class="twelve columns alpha" id="sale-form">
+  <%= form_for [:admin, @sale] do |f| %>
+    <fieldset data-hook="new_product">
+      <legend align="center"><%= Spree.t(:new_sale) %></legend>
+
+      <%= f.field_container :name do %>
+        <%= f.label :name, Spree.t(:name) %> <span class="required">*</span><br/>
+        <%= f.text_field :name, class: 'fullwidth title' %>
+        <%= f.error_message_on :name %>
+      <% end %>
+
+      <%= f.field_container :taxons do %>
+        <%= f.label :taxon_ids, Spree.t(:taxons) %><br />
+        <%= f.hidden_field :taxon_ids, value: @sale.taxon_ids.join(','), id: 'product_taxon_ids' %>
+      <% end %>
+
+      <%= f.field_container :discount do %>
+        <%= f.label :discount, Spree.t(:discount) %><br />
+        <%= f.number_field :discount %>
+      <% end %>
+
+      <%= f.field_container :end_date do %>
+        <%= f.label :end_date, Spree.t(:end_date) %><br />
+        <%= f.text_field :end_date, value: datepicker_field_value(@sale.end_date), class: 'datepicker' %>
+      <% end %>
+
+      <div class="form-buttons filter-actions actions" data-hook="buttons">
+        <%= f.submit %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>
+
+<script>
+  $(function(){
+    $('.select2-container').css({width: '100%'})
+  });
+</script>

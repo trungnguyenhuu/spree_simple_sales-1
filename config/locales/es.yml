@@ -1,0 +1,8 @@
+es:
+  spree:
+    sales: Ofertas
+  activerecord:
+    models:
+      spree/sale:
+        other: Ofertas
+        one: Oferta

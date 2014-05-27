@@ -1,0 +1,2 @@
+<!-- insert_bottom "ul[data-hook=admin_tabs]" -->
+<%= tab(:sales, url: spree.admin_sales_path, icon: 'icon-bullhorn') %>

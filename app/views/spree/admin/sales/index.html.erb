@@ -1,0 +1,36 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:listing_sales) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li id="new_product_link">
+    <%= button_link_to Spree.t(:new_sale), spree.new_admin_sale_path, { icon: 'icon-plus', id: 'admin-new-sale' } %>
+  </li>
+<% end %>
+
+<% if @sales.any? %>
+  <table class="index responsive">
+    <colgroup>
+      <col style="width: 35%;">
+      <col style="width: 35%;">
+      <col style="width: 15%;">
+      <col style="width: 15%;">
+    </colgroup>
+    <thead>
+      <tr>
+        <th><%= Spree.t(:name) %></th>
+        <th><%= Spree.t(:taxons) %></th>
+        <th><%= Spree.t(:end_date) %></th>
+        <th><%= Spree.t(:sales_actions) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'spree/admin/sales/sale', collection: @sales %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/sale')) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_sale_path %>!
+  </div>
+<% end %>
