@@ -7,7 +7,8 @@ module Spree
     validates :name, :end_date,
               presence: true
 
-    after_save :update_async!
+    after_commit :update_async!, on: [:create, :update]
+    after_commit :deactivate_async!, on: :destroy
 
     def activate!
       Spree::Product.in_taxons(taxons).readonly(false).find_each do |product|
@@ -36,19 +37,22 @@ module Spree
       super(string_ids.split(','))
     end
 
+    def schedule_deactivation
+      update_column :deactivation_job_id, SaleDeactivator.perform_at(end_date, self.id)
+    end
+
     private
 
+    def deactivate_async!
+      delay.deactivate!(true)
+    end
+
     def update_async!
-      SaleUpdater.perform_in(5.seconds, self.id)
-      schedule_deactivation
+      SaleUpdater.perform_async(self.id)
     end
 
     def unschedule_current_job
       Sidekiq::Status.cancel deactivation_job_id if deactivation_job_id
-    end
-
-    def schedule_deactivation
-      update_column :deactivation_job_id, SaleDeactivator.perform_at(end_date, self.id)
     end
   end
 end
