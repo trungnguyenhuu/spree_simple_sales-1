@@ -35,7 +35,6 @@ module Spree
       end
 
       def destroy
-        @sale.deactivate! true
         @sale.destroy
         redirect_to spree.admin_sales_path
       end
