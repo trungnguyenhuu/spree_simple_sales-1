@@ -1,5 +1,7 @@
 module Spree
   class Sale < ActiveRecord::Base
+    acts_as_paranoid
+
     has_and_belongs_to_many :taxons
 
     attr_accessible :name, :end_date, :discount, :taxon_ids
@@ -7,7 +9,8 @@ module Spree
     validates :name, :end_date,
               presence: true
 
-    after_commit :update_async!, on: [:create, :update]
+    after_commit :create_async!, on: :create
+    after_commit :update_async!, on: :update
     after_commit :deactivate_async!, on: :destroy
 
     def activate!
@@ -44,12 +47,14 @@ module Spree
     private
 
     def deactivate_async!
-      delay.deactivate!(true)
+      SaleDeactivator.perform_async(self.id, true)
     end
 
     def update_async!
       SaleUpdater.perform_async(self.id)
     end
+
+    alias :create_async! :update_async!
 
     def unschedule_current_job
       Sidekiq::Status.cancel deactivation_job_id if deactivation_job_id
