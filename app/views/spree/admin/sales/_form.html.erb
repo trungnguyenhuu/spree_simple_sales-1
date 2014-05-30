@@ -21,7 +21,7 @@
 
       <%= f.field_container :end_date do %>
         <%= f.label :end_date, Spree.t(:end_date) %><br />
-        <%= f.text_field :end_date, value: datepicker_field_value(@sale.end_date), class: 'datepicker' %>
+        <%= f.datetime_select :end_date %>
       <% end %>
 
       <div class="form-buttons filter-actions actions" data-hook="buttons">
